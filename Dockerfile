@@ -1,10 +1,9 @@
-FROM nvidia/cuda:12.1.1-devel-ubuntu22.04
-
-RUN apt-get update && apt-get install -y python3-pip python3-dev && rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install --no-cache-dir vllm==0.4.0.post1 torch==2.1.2 fastapi uvicorn pydantic
+FROM python:3.10-slim
 
 WORKDIR /app
+
+RUN pip install --no-cache-dir fastapi uvicorn pydantic huggingface_hub
+
 COPY main.py /app/main.py
 
 EXPOSE 10000
